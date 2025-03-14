@@ -139,6 +139,10 @@ const loginUser = asyncHandler( async(req, res) => {
         "-password -refreshToken"
     )
 
+    if(!loggedInUser) {
+        throw new ApiError(500, "Something went wrong while logging in the user")
+    }
+
     // Cookie settings for security
     const options = {
         httpOnly: true,  // Prevents JavaScript access to cookies
@@ -200,14 +204,14 @@ const refreshAccessToken = asyncHandler( async (req, res) => {
         const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
         
         // fetch user from database using decoded token payload
-        const user = User.findById(decodedToken?._id)
+        const user = await User.findById(decodedToken?._id)
     
         if(!user) {
             throw new ApiError(401, "Invalid Refresh Token")
         }
     
-		    // user.refreshToken is a string stored in db
-		    // The refresh token from the request matches the one stored in the database.
+        // user.refreshToken is a string stored in db
+        // The refresh token from the request matches the one stored in the database.
         if(incomingRefreshToken !== user?.refreshToken) {
             throw new ApiError(401, "Refresh token has expired or is invalid")
         }
