@@ -41,7 +41,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
         title,
         description,
         duration: videoFile.duration,
-        views: videoFile.views
+        views: videoFile.views,
+        owner: req.user?._id
     })
 
     const generatedVideo = await Video.findById(video._id)
