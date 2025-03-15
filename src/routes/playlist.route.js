@@ -6,7 +6,7 @@ import {
     getPlaylistById,
     getUserPlaylists,
     removeVideoFromPlaylist,
-    updatePlaylist,
+    updatePlaylist
 } from "../controllers/playlist.controllers.js"
 import {verifyJWT} from "../middlewares/auth.middlewares.js"
 
@@ -16,8 +16,7 @@ router.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
 
 router.route("/").post(createPlaylist)
 
-router
-    .route("/:playlistId")
+router.route("/:playlistId")
     .get(getPlaylistById)
     .patch(updatePlaylist)
     .delete(deletePlaylist);

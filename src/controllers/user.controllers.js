@@ -6,7 +6,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
 
-// Function to generate access and refresh tokens
+
 const generateAccessAndRefreshTokens = async(userId) => {
     try {
         // Find user by id for generating the token for it
@@ -24,7 +24,6 @@ const generateAccessAndRefreshTokens = async(userId) => {
     }
 }
 
-// User registration handler
 const registerUser = asyncHandler( async(req, res) => {
     const { username, email, fullname, password } = req.body;
     console.log("req.body: ", req.body);
@@ -94,7 +93,6 @@ const registerUser = asyncHandler( async(req, res) => {
 
 })
 
-// User login handler
 const loginUser = asyncHandler( async(req, res) => {
     // req body -> data
     // username or email
@@ -163,7 +161,6 @@ const loginUser = asyncHandler( async(req, res) => {
         )
 })
 
-// User logout handler
 const logoutUser = asyncHandler( async(req, res) => {
     // Clear refresh token from user database
     await User.findByIdAndUpdate(
