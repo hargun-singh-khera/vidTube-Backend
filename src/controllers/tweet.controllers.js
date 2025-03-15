@@ -25,6 +25,9 @@ const createTweet = asyncHandler(async (req, res) => {
 
 const getUserTweets = asyncHandler(async (req, res) => {
     const {userId} = req.params
+    if(!userId) {
+        throw new ApiError(400, "User ID is required")
+    }
     const tweets = await Tweet.find({owner: userId})
     if(!tweets) {
         throw new ApiError(404, "No tweets found for this user")
@@ -36,6 +39,9 @@ const getUserTweets = asyncHandler(async (req, res) => {
 
 const updateTweet = asyncHandler(async (req, res) => {
     const {tweetId} = req.params
+    if(!tweetId) {
+        throw new ApiError(400, "Tweet ID is required")
+    }
     const {content} = req.body
     if(!content) {
         throw new ApiError(400, "Please add content to your post or tweet.")
@@ -57,7 +63,13 @@ const updateTweet = asyncHandler(async (req, res) => {
 
 const deleteTweet = asyncHandler(async (req, res) => {
     const {tweetId} = req.params
-    await Tweet.findByIdAndDelete(tweetId)
+    if(!tweetId) {
+        throw new ApiError(400, "Tweet ID is required")
+    }
+    const tweet = await Tweet.findByIdAndDelete(tweetId)
+    if(!tweet) {
+        throw new ApiError(404, "Failed to delete tweet, tweet not found")
+    }
     return res
         .status(200)
         .json(new ApiResponse(200, {}, "Tweet deleted successfully"))

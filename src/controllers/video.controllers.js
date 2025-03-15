@@ -57,6 +57,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
 const getVideoById = asyncHandler(async (req, res) => {
     const { videoId } = req.params
+    if(!videoId) {
+        throw new ApiError(400, "Video ID is required")
+    }
     const video = await Video.findById(videoId)
     if(!video) {
         throw new ApiError(500, "Something went wrong while fetching the video")
@@ -68,6 +71,9 @@ const getVideoById = asyncHandler(async (req, res) => {
 
 const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
+    if(!videoId) {
+        throw new ApiError(400, "Video ID is required")
+    }
     //TODO: update video details like title, description, thumbnail
     const { title, description } = req.body
     if(!title && !description) {
@@ -103,7 +109,9 @@ const updateVideo = asyncHandler(async (req, res) => {
 
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    
+    if(!videoId) {
+        throw new ApiError(400, "Video ID is required")
+    }
     const video = await Video.findByIdAndDelete(videoId)
     if(!video) {
         throw new ApiError(500, "Something went wrong while deleting the video")
@@ -115,7 +123,9 @@ const deleteVideo = asyncHandler(async (req, res) => {
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-
+    if(!videoId) {
+        throw new ApiError(400, "Video ID is required")
+    }
     const video = await Video.findById(videoId)
     video.isPublished = !video.isPublished
     await video.save({ validateBeforeSave: false })

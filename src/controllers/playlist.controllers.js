@@ -26,6 +26,9 @@ const createPlaylist = asyncHandler(async (req, res) => {
 
 const getUserPlaylists = asyncHandler(async (req, res) => {
     const {userId} = req.params
+    if(!userId) {
+        throw new ApiError(400, "User ID is required")
+    }
     const playlists = await Playlist.find({owner: userId})
     if(!playlists) {
         throw new ApiError(404, "No playlists found")
@@ -37,6 +40,9 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
 
 const getPlaylistById = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
+    if(!playlistId) {
+        throw new ApiError(400, "Playlist ID is required")
+    }
     const playlist = await Playlist.findById(playlistId)
     if(!playlist) {
         throw new ApiError(404, "Playlist not found")
@@ -52,12 +58,13 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
 
 const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
     const {playlistId, videoId} = req.params
-    // TODO: remove video from playlist
-
 })
 
 const deletePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
+    if(!playlistId) {
+        throw new ApiError(400, "Playlist ID is required")
+    }
     const playlist = await Playlist.findByIdAndDelete(playlistId) 
     if(!playlist) {
         throw new ApiError(404, "Unable to delete playlist which does not exist")
@@ -69,6 +76,9 @@ const deletePlaylist = asyncHandler(async (req, res) => {
 
 const updatePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
+    if(!playlistId) {
+        throw new ApiError(400, "Playlist ID is required")
+    }
     const {name, description} = req.body
     if(!name && !description) {
         throw new ApiError(400, "Name and description are required")
