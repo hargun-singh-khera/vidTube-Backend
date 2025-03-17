@@ -1,11 +1,54 @@
+# VidTube - Professional Backend Overview
 
-# Summary of this project
-This is a video series on backend with javascript
-- [Model link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj?origin=share)
+## Introduction
+This repository hosts the backend infrastructure for **VidTube**, a YouTube-like platform, providing robust functionality for user authentication, video management, commenting, and more. Designed for scalability and performance, this server efficiently handles key operations that power an engaging user experience.
+
+## Prerequisites
+Before setting up the project, ensure your system meets the following requirements:
+- **Node.js**: Install the latest stable version.
+- **MongoDB**: Set up a MongoDB instance for data storage.
+
+To install dependencies, run:
+```bash
+npm install
+```
+
+## Running the Server
+For development mode with hot-reloading and experimental JSON module support, use:
+```bash
+npm run dev
+```
+
+## Project Structure
+The backend follows a modular architecture for maintainability and scalability:
+- **`src/`** – Core backend logic.
+  - **`index.js`** – Main entry point of the server.
+  - **`routes/`** – Defines API endpoints.
+  - **`controllers/`** – Implements business logic for each route.
+  - **`middlewares/`** – Custom middleware functions.
+  - **`models/`** – Database schema definitions using Mongoose.
+  - **`utils/`** – Reusable utility functions.
+
+## Dependencies
+The server leverages well-established libraries to ensure security, performance, and maintainability:
+- **bcrypt** – Secure password hashing.
+- **cloudinary** – Cloud-based media storage and delivery.
+- **cookie-parser** – Enhances cookie handling for authentication.
+- **cors** – Enables cross-origin requests.
+- **dotenv** – Manages environment variables securely.
+- **express** – Fast and flexible web framework.
+- **jsonwebtoken** – JWT-based authentication.
+- **mongoose** – Simplifies MongoDB interactions.
+- **mongoose-aggregate-paginate-v2** – Efficient pagination for large datasets.
+- **multer** – Handles file uploads.
+- **nodemon** – Automates server restarts during development.
+- **prettier** – Ensures consistent code formatting.
+
+## License
+This project is open-source and licensed under the **ISC License**, encouraging collaboration and innovation. Contributions, suggestions, and improvements are highly welcome. For inquiries, feel free to open an issue.
 
 ---
+*Explore the repository, contribute, and help refine VidTube's backend into a highly scalable and feature-rich system!*
 
-This project is a complex backend project that is built with nodejs, expressjs, mongodb, mongoose, jwt, bcrypt, and many more. This project is a complete backend project that has all the features that a backend project should have.
-We are building a complete video hosting website similar to youtube with all the features like login, signup, upload video, like, dislike, comment, reply, subscribe, unsubscribe, and many more.
 
-Project uses all standard practices like JWT, bcrypt, access tokens, refresh Tokens and many more. We have spent a lot of time in building this project and we are sure that you will learn a lot from this project.
+- [Model link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj?origin=share)
